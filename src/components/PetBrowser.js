@@ -3,17 +3,23 @@ import React from 'react';
 import Pet from './Pet';
 
 class PetBrowser extends React.Component {
-  render() {
-  
-  let getPets = Pets.map(pet, () => {
-    return (
-    <
-    )
+  constructor(props) {
+    super(props);
   }
+
+  allPets = () => {
+    this.props.pets.map(pet => {
+      return (
+        < Pet pet={pet} />
+      )
+    });
+  }
+
+  render() {
   
     return (
       <div className="ui cards">
-        < Pet pets={this.props.pets} />
+        < Pet pet={this.props.pets} />
       </div>
     );
   }
