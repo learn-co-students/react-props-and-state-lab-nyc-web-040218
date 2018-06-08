@@ -1,37 +1,29 @@
 import React from 'react';
 
-const gender = () => {
-  if (this.props.gender === "male"){
-    return "♂"
-  }else{
-    return "♀"
-  }
-}
-
 class Pet extends React.Component {
   constructor(props) {
     super(props);
   }
-  
-  adoptPet = (e) => {
-    this.props.onAdoptPet(e.target.id);
+
+  amIAdopted = () => {
+    return this.props.adoptedArray.includes(this.props.pet.id);
   }
 
   render() {
     return (
       <div className="card">
         <div className="content">
-          {/* <a className="header">Pet name {this.props.name} {gender()}</a> */}
+          <a className="header">Name: {this.props.pet.name} {(this.props.pet.gender === "male") ? "♂" : "♀" }</a>
           <div className="meta">
-            <span className="date">Pet type: {this.props.type}</span>
+            <span className="date">Type: {this.props.pet.type}</span>
           </div>
-          <div className="description" onClick={this.adoptPet}>
-            <p>Age: {this.props.age}</p>
-            <p>Weight: {this.props.weight}</p>
+          <div className="description">
+            <p>Age: {this.props.pet.age}</p>
+            <p>Weight: {this.props.pet.weight}</p>
           </div>
         </div>
         <div className="extra content">
-        {this.props.isAdopted ? (<button className="ui primary button" id={this.props.id} onClick={this.adoptPet}>Adopt pet</button>) : (<button className="ui disabled button">Already adopted</button>)}
+          { this.amIAdopted() ? (<button className="ui disabled button">Already adopted</button>) : (<button id={this.props.pet.id} className="ui primary button" onClick={this.props.onAdoptPet} >Adopt pet</button>)}
         </div>
       </div>
     );
